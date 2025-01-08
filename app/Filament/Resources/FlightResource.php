@@ -17,7 +17,7 @@ class FlightResource extends Resource
 {
     protected static ?string $model = Flight::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-arrow-down-on-square-stack';
 
     public static function form(Form $form): Form
     {
