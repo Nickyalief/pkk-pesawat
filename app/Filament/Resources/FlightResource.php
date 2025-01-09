@@ -18,6 +18,8 @@ class FlightResource extends Resource
     protected static ?string $model = Flight::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-arrow-down-on-square-stack';
+    protected static ?string $navigationGroup = 'System Manejement';
+
 
     public static function form(Form $form): Form
     {
@@ -60,8 +62,8 @@ class FlightResource extends Resource
                             ->schema([
                                 forms\Components\Select::make('class_type')
                                 ->options([
-                                    'economy' => 'economy',
-                                    'business' => 'business',
+                                    'Economy' => 'Economy',
+                                    'Business' => 'Business',
                                 ])
                                 ->required(),
                                 forms\Components\TextInput::make('price')
