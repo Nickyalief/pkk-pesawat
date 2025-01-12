@@ -19,7 +19,10 @@ class PromoCodeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
     protected static ?string $navigationGroup = 'System Manejement';
-    
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Form $form): Form
     {
@@ -29,6 +32,7 @@ class PromoCodeResource extends Resource
                 ->required()
                 ->maxLength(255),
                 forms\Components\Select::make('discount_type')
+                ->required()
                 ->options([
                     'percentage' => 'Percentage',
                     'fixed' => 'Fixed',
@@ -39,7 +43,7 @@ class PromoCodeResource extends Resource
                 ->minValue(0),
                 forms\Components\DateTimePicker::make('valid_until')
                 ->required(),
-                forms\Components\Toggle::make('is_uses')
+                forms\Components\Toggle::make('is_used')
                 ->required(),
                 
             ]);
@@ -56,7 +60,7 @@ class PromoCodeResource extends Resource
                     'fixed' => 'Rp' . number_format($record->discount, 0, ',', '.'),
                     'percentage' => $record->discount . '%',
                 }),
-                tables\Columns\ToggleColumn::make('is_uses'),
+                tables\Columns\ToggleColumn::make('is_used'),
             ])
             ->filters([
                 //

@@ -29,12 +29,12 @@ class Transaction extends Model
         return $this->belongsTo(Flight::class);
     }
 
-    public function Class()
+    public function class()
     {
         return $this->belongsTo(FlightClass::class);
     }
-
-    public function Promo()
+    
+    public function promo()
     {
         return $this->belongsTo(PromoCode::class);
     }

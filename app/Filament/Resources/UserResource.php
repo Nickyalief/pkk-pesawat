@@ -20,25 +20,32 @@ class UserResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $navigationGroup = 'User Manajement';
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Select::make('roles')
-                    ->relationship('roles', 'name'),
-                Forms\Components\TextInput::make('password')
-                    ->password()
-                    ->required()
-                    ->maxLength(255),
-            ]);
+    ->schema([
+        Forms\Components\TextInput::make('name')
+            ->required()
+            ->maxLength(255)
+            ->autocomplete('off'), // Menonaktifkan autocomplete untuk "name"
+        Forms\Components\TextInput::make('email')
+            ->email()
+            ->required()
+            ->maxLength(255)
+            ->autocomplete('off'), // Menonaktifkan autocomplete untuk "email"
+        Forms\Components\Select::make('roles')
+            ->relationship('roles', 'name'),
+        Forms\Components\TextInput::make('password')
+            ->password()
+            ->required()
+            ->maxLength(255)
+            ->autocomplete('new-password'), // Menghindari auto-fill untuk "password"
+    ]);
     }
 
     public static function table(Table $table): Table

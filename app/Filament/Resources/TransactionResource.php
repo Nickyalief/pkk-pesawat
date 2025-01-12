@@ -40,12 +40,32 @@ class TransactionResource extends Resource
                 ]),
                 Forms\Components\Section::make('Informasi Penumpang')
                 ->schema([
+                    forms\Components\TextInput::make('number_of_passengers'),
                     forms\Components\TextInput::make('name'),
                     forms\Components\TextInput::make('email'),
                     forms\Components\TextInput::make('phone'),
-                    forms\Components\TextInput::make('number_of_passengers'),
-                    
+                    Forms\Components\Section::make('Daftar Penumpang')
+                    ->schema([
+                        forms\Components\Repeater::make('passenger')
+                            ->relationship('passengers')
+                            ->schema([
+                                forms\Components\TextInput::make('seat.name'),
+                                forms\Components\TextInput::make('name'),
+                                forms\Components\TextInput::make('date_of_birth'),
+                                forms\Components\TextInput::make('nationality'),
+                            ])
+                    ])
+            
                 ]),
+                Forms\Components\Section::make('Pembayaran')    
+                ->schema([
+                    forms\Components\TextInput::make('promo.code'),
+                    forms\Components\TextInput::make('promo.discount_type'),
+                    forms\Components\TextInput::make('promo.discount'),
+                    forms\Components\TextInput::make('payment_status'),
+                    forms\Components\TextInput::make('subtotal'),
+                    forms\Components\TextInput::make('grandtotal'),
+                ])
             ]);
     }
 
